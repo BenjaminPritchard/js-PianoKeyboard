@@ -8,49 +8,47 @@
 
 	var Middle_D 	= 41;
 	var CurInterval = 0;
+	var KeyNumber   = 0;
+
+	var interval1;
+	var interval2;
+
+	function clearIntervals() {
+		clearInterval(interval1); 
+		clearInterval(interval2); 
+	}
 
 	function DrawCMajorChord() {
-
-		var canvas = document.getElementById("canvas");
-
-		RedKeys = [0, 39, 43, 46];
-
+		clearIntervals();
+		RedKeys = [39, 43, 46];
 		DrawKeyboard(canvas, RedKeys);
 	}
 	
 	function PlayChromaticScale() { 
 	
 		function PlayChromaticScaleCode() {
-		
-			var canvas = document.getElementById("canvas");
-	
 			RedKeys = [KeyNumber];
 			DrawKeyboard(canvas, RedKeys);
-			
 			if (KeyNumber != 87) KeyNumber += 1; else KeyNumber = 0;
-			
 		}
-			
+		
 		PlayChromaticScaleCode();
-		setInterval(PlayChromaticScaleCode, 250);
+		clearIntervals();
+		interval1 = setInterval(PlayChromaticScaleCode, 250);
 	
 	}
 	
 	function IllustrateKeyboardSymmetry() { 
 	
 		function IllustrateKeyboardSymmetryCode() {
-		
-			var canvas = document.getElementById("canvas");
-				
 			RedKeys = [Middle_D - CurInterval, Middle_D + CurInterval];
 			DrawKeyboard(canvas, RedKeys);
-			
 			if (CurInterval != 20) CurInterval += 1; else CurInterval = 0;
-			
 		}
 			
 		IllustrateKeyboardSymmetryCode();
-		setInterval(IllustrateKeyboardSymmetryCode, 750);
+		clearIntervals();
+		interval2 = setInterval(IllustrateKeyboardSymmetryCode, 750);
 	
 	}
 	
@@ -58,10 +56,24 @@
 </script>
 
 
-<body  onload="IllustrateKeyboardSymmetry()";>
+<body>
 
 <canvas id="canvas" width="650" height="72">Your browser does not support the HTML5 canvas tag.</canvas>
+<br>
+<button id="button1" type="button">C Major Chord</button>
+<button id="button2" type="button">Chromatic Scale</button>
+<button id="button3" type="button">Keyboard Symmetry</button>
 
 </body>
 
 </html>
+
+<script>
+	var canvas = document.getElementById("canvas");
+
+	document.getElementById("button1").addEventListener("click", DrawCMajorChord)
+	document.getElementById("button2").addEventListener("click", PlayChromaticScale)
+	document.getElementById("button3").addEventListener("click", IllustrateKeyboardSymmetry)
+
+	DrawKeyboard(canvas,[]);
+</script>

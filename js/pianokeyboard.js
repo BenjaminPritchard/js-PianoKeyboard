@@ -8,7 +8,7 @@
 	Usage:
 
 		var canvas = document.getElementById("canvas");
-		RedKeys = [0, 39, 43, 46];
+		RedKeys = [39, 43, 46];
 		DrawKeyboard(canvas, RedKeys);	
 
 */
